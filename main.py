@@ -51,23 +51,92 @@ def menu():
     option = input("\nchoose: ")
 
     if option == "1":
-        linux()
+        installApps()
 
-def linux():
+def updateLinux():
     purple()
     print("\n[!] Which linux distro you are using? [!]")
     print("  1. Kali")
     print("  2. Parrot")
-    linuxType = input("--> ")
     white()
+    linuxType = input("--> ")
+    print("\n[+] Actualizando el sistema")
     if linuxType == "1":
-        print("type 1")
-        #os.system("sudo apt update -y")
-        #os.system("sudo apt upgrade -y")
+        #Actualiza el Kali
+        os.system("sudo apt-get update -y")
+        os.system("sudo apt-get upgrade -y")
     if linuxType == "2":
-        print("type 2")
-        #os.system("sudo parrot-upgrade -y")
-        
+        #Actualiza el Parrot
+        os.system("sudo parrot-upgrade")
+    #remueve dependencias que ya no se usan para el sistema o una app
+    time.sleep(1)
+    os.system("sudo apt-get autoremove -y")
+    time.sleep(1)
+
+    print("\n[+] Sistema correctamente actualizado")
+    print("\n--------------------------------------")
+    time.sleep(1)
+
+def installApps():
+    purple()
+    print("\n[!] Want to Update? 1: Yes   2: No")
+    white()
+    flag = input("--> ")
+    if flag == "1":
+        updateLinux()
+    else:
+        None
+
+    
+    print("\n[+] Instalando aplicaciones [+]")
+    time.sleep(1)
+
+    #verificando si existe el descomprimido
+    if os.path.exists("/usr/share/wordlists/rockyou.txt.gz"):
+        #descomprimiendo rockyou y eliminando el .gz
+        os.system("sudo gzip -d /usr/share/wordlists/rockyou.txt.gz")
+        os.system("sudo rm -r /usr/share/wordlists/rockyou.txt.gz")
+    else:
+        None
+    
+    #instalando el wordlist de seclists
+    if os.path.exists("/usr/share/wordlists/rockyou.txt.gz"):
+        os.system("sudo apt-get install seclists -y")
+    else:
+        None
+
+    #instalando gedit (editor de texto)
+    os.system("sudo apt-get install gedit -y") if os.system("gedit --version") else None
+
+    #instalando ffuf
+    os.system("sudo apt-get install ffuf -y") if os.system("ffuf --version") else None
+
+    #instalando wpscan
+    os.system("sudo apt-get install wpscan -y") if os.system("wpscan --version") else None
+
+    #instalando sqlmap
+    os.system("sudo apt-get install sqlmap -y") if os.system("sqlmap --version") else None
+
+    #instalando hash-identifier
+    os.system("sudo apt-get install hash-identifier -y")
+
+    #instalando sublist3r
+    os.system("sudo apt-get install sublist3r -y") if os.system("sublist3r --version") else None
+
+    #Descargando winpeas y linpeas
+    if os.path.exists("Downloads/tools"):
+        pass
+    else:
+        os.system("mkdir ~/Downloads/tools")
+        time.sleep(1)
+        os.system("wget https://github.com/carlospolop/PEASS-ng/releases/tag/20230101/linpeas.sh -P ~/Downloads/tools/")
+        time.sleep(1)
+        os.system("wget https://github.com/carlospolop/PEASS-ng/releases/tag/20230101/winPEASx64.exe -P ~/Downloads/tools/")
+        os.system("mv ~/Downloads/tools/winPEASx64.exe ~/Downloads/tools/winpeas.exe")
+
+    red()
+    print("\n[+] Se Instalaron las Aplicaciones Satisfactoriamente [+]")
+
 def terminal():
     print("\nterminal")
 
