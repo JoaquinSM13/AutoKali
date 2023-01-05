@@ -138,6 +138,19 @@ def installApps():
     print("\n[+] Se Instalaron las Aplicaciones Satisfactoriamente [+]")
 
 def terminal():
-    print("\nterminal")
+    white()
+    os.system("sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh")
+    os.system("sudo chmod +x /usr/local/bin/oh-my-posh")
+    os.system("mkdir ~/.poshthemes")
+    os.system("wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O ~/.poshthemes/themes.zip")
+    os.system("unzip ~/.poshthemes/themes.zip -d ~/.poshthemes")
+    os.system("chmod u+rw ~/.poshthemes/*.omp.*")
+    os.system("rm ~/.poshthemes/themes.zip")
+    #select your font to install
+    os.system("oh-my-posh font install")
+    #ingresar el tema que quieres usar en el ~/.bashrc
+    os.system("""echo 'eval "$(oh-my-posh init bash --config ~/.poshthemes/M365Princess.omp.json)"' >> ~/.bashrc""")
+    #comando para ver la terminal con el oh-my-posh
+    os.system("exec bash")
 
 menu()
