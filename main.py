@@ -52,6 +52,11 @@ def menu():
 
     if option == "1":
         installApps()
+    if option == "2":
+        terminal()
+    if option == "3":
+        installApps()
+        terminal()
 
 def updateLinux():
     purple()
