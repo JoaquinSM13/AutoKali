@@ -154,8 +154,8 @@ def terminal():
     #select your font to install
     os.system("oh-my-posh font install")
     #ingresar el tema que quieres usar en el ~/.bashrc
-    os.system("""echo 'eval "$(oh-my-posh init bash --config ~/.poshthemes/M365Princess.omp.json)"' >> ~/.bashrc""")
+    os.system("""echo 'eval "$(oh-my-posh init zsh --config ~/.poshthemes/M365Princess.omp.json)"' >> ~/.bashrc""")
     #comando para ver la terminal con el oh-my-posh
-    os.system("exec bash")
+    os.system("exec zsh")
 
 menu()
